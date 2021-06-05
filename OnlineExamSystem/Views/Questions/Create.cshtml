@@ -54,7 +54,8 @@
                         int counter = 0;
                     }
                     @foreach (var item in Model.QuestionAnswersDataModel)
-                    { 
+                    {
+                        var hiddeniscorrectcontrolid= "hdnIsCorrect"+counter.ToString();
 
                         <tr>
                             <td style="visibility:hidden">
@@ -69,7 +70,16 @@
                                 @Html.ValidationMessageFor(x=>Model.QuestionAnswersDataModel[counter].AnswerText)
                             </td>
                             <td>
-                              <input type="radio" asp-for="@item.IsCorrext" value="@item.Id" name="IsCorrext" id="QuestionAnswersDataModel[@counter].IsCorrext" />
+                                @if (item.IsCorrext)
+                                {
+                                    <input type="radio" checked value="@item.Id" name="IsCorrext" id="QuestionAnswersDataModel[@counter].IsCorrext" onchange="$('.txtiscorrectcontrol').val('False'); if ($(this).is(':checked')) { $('#@hiddeniscorrectcontrolid').val('True') }"/>
+                                }
+                                else
+                                {
+                                    <input type="radio" value="@item.Id" name="IsCorrext" id="QuestionAnswersDataModel[@counter].IsCorrext" onchange="$('.txtiscorrectcontrol').val('False'); if ($(this).is(':checked')) { $('#@hiddeniscorrectcontrolid').val('True') }" />
+
+                                }
+                                <input type="hidden" value="@item.IsCorrext.ToString()" name="@hiddeniscorrectcontrolid" id="@hiddeniscorrectcontrolid" class="txtiscorrectcontrol"   />
                             </td>
 
                         </tr>

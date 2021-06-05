@@ -38,7 +38,7 @@ namespace OnlineExamSystem.Controllers
         public IActionResult Create()
         {
             var x = new List<QuestionAnswersDataModel>(5) {
-            new QuestionAnswersDataModel(),new QuestionAnswersDataModel(),new QuestionAnswersDataModel(),new QuestionAnswersDataModel(),new QuestionAnswersDataModel(), };
+            new QuestionAnswersDataModel{IsCorrext=true },new QuestionAnswersDataModel(),new QuestionAnswersDataModel(),new QuestionAnswersDataModel(),new QuestionAnswersDataModel(), };
 
             ViewData["DifficultyLevelId"] = new SelectList(_difficultyLevelsService.list(), "Id", "DifficultyLevelName");
             
@@ -52,6 +52,14 @@ namespace OnlineExamSystem.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(QuestionsDataModel questions)
         {
+            for (int i=0;i< questions.QuestionAnswersDataModel.Count();i++)
+            {
+                questions.QuestionAnswersDataModel[i].IsCorrext = Request.Form["hdnIsCorrect" + i.ToString()][0] == "True";
+            }
+                
+                
+                
+                
             if (ModelState.IsValid)
             {
                 _questionsService.Add(questions);
