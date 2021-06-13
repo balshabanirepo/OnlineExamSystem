@@ -28,7 +28,7 @@ namespace ServicesClasseslibrary
 
         public void Edit(QuestionsDataModel questionAnswers)
         {
-           
+            _questionsOperations.Edit(questionAnswers);
         }
 
         public QuestionsDataModel GetById(int id)
@@ -44,7 +44,8 @@ namespace ServicesClasseslibrary
                     {
                         Id = qrec.Id,
                         QuestionText = qrec.QuestionText,
-                        DifficultyLevelId = qrec.DifficultyLevelId
+                        DifficultyLevelId = qrec.DifficultyLevelId,
+
                     }).ToList();
         }
     }

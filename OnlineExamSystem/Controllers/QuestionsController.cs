@@ -91,13 +91,16 @@ namespace OnlineExamSystem.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Id,QuestionText,DifficultyLevelId")] QuestionsDataModel questions)
+        public IActionResult Edit(QuestionsDataModel questions)
         {
-            if (id != questions.Id)
+            //if (id != questions.Id)
+            //{
+            //    return NotFound();
+            //}
+            for (int i = 0; i < questions.QuestionAnswersDataModel.Count(); i++)
             {
-                return NotFound();
+                questions.QuestionAnswersDataModel[i].IsCorrext = Request.Form["hdnIsCorrect" + i.ToString()][0] == "True";
             }
-
             if (ModelState.IsValid)
             {
                 try

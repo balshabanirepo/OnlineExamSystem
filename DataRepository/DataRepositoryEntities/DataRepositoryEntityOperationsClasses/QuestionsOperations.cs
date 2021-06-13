@@ -53,9 +53,40 @@ namespace DataRepository.DataRepositoryEntities.DataRepositoryEntityOperationsCl
            
         }
 
-        public void Edit(QuestionsDataModel questions)
+        public void Edit(QuestionsDataModel questionsDataModel)
         {
-           
+            DataRepository.DataRepositoryEntities.Questions questions1, questions2;
+            DataRepositoryEntities.QuestionAnswers answers;
+
+            _contextGateWay.CreateDatabaseTransaction();
+            questions1 = new Questions
+            {
+
+                Id = questionsDataModel.Id,
+                QuestionText = questionsDataModel.QuestionText,
+                DifficultyLevelId=questionsDataModel.DifficultyLevelId
+            };
+            questions2 = _contextGateWay.Questions.GetById(g => g.Id == questionsDataModel.Id);
+
+            _contextGateWay.Questions.Edit(questions2, questions1);
+
+            foreach (QuestionAnswersDataModel questionAnswers in questionsDataModel.QuestionAnswersDataModel)
+            {
+                answers = _contextGateWay.QuestionAnswers.GetById(g => g.Id == questionAnswers.Id);
+                _contextGateWay.QuestionAnswers.Delete(answers);
+
+                _contextGateWay.QuestionAnswers.Add(
+                    new QuestionAnswers
+                    {
+                      
+                        AnswerText = questionAnswers.AnswerText,
+                        IsCorrect = questionAnswers.IsCorrext,
+                        QuestionId = questionsDataModel.Id
+                    });
+            }
+            _contextGateWay.Commit();
+
+            
         }
 
         public QuestionsDataModel GetById(int id)
