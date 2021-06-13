@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataRepository.DataRepositoryEntities;
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
@@ -8,100 +10,56 @@ using System.Text;
 
 namespace DataRepository.GateWay
 {
-   internal class ContextGateway<TModelRepository> where TModelRepository : class
+   public class ContextGateway: IContextGateWay
     {
+       
+        public  RepositoryGateWay<DataRepositoryEntities.Questions> Questions { get; set; }
+
+        public  RepositoryGateWay<QuestionAnswers> QuestionAnswers { get; set; }
+
+        public RepositoryGateWay<DifficultyLevels> DifficultyLevels { get; set; }
         private static DbConext dbConext;
-
-        internal static void GetContextInstance()
+        public ContextGateway()
         {
-            if (dbConext == null)
-            {
-                dbConext = new DbConext();
-            }
-           //return dbConext;
-        }
-
-        private ContextGateway() { }
-
-        internal static void Add(IRepository repository) 
-        {
-            dbConext.Entry(repository).State = EntityState.Added;
-
-            dbConext.SaveChanges();
-        }
-        internal static void Edit(IRepository repository)
-        {
-
-            dbConext.Entry(repository).State = EntityState.Modified;
-
-            dbConext.SaveChanges();
-
+            DifficultyLevels = new RepositoryGateWay<DifficultyLevels>();
+            QuestionAnswers = new RepositoryGateWay<QuestionAnswers>();
+            DifficultyLevels = new RepositoryGateWay<DifficultyLevels>();
+            Questions = new RepositoryGateWay<Questions>();
 
 
         }
+       
+      
 
+        //private ContextGateway() { }
 
-
-        internal static void Edit(IRepository repository, IRepository withnewvalues)
-        {
-            dbConext.Entry(repository).State = EntityState.Detached;
-
-            dbConext.Entry(withnewvalues).State = EntityState.Modified;
-            dbConext.SaveChanges();
-
-        }
-
-        internal static void Delete(IRepository repository)
-        {
-            dbConext.Entry(repository).State = EntityState.Deleted;
-
-            dbConext.SaveChanges();
-        }
-
-        internal static TModelRepository GetById(Expression<Func<TModelRepository, bool>> predicate)
-        {
-            return dbConext.Set<TModelRepository>().Where(predicate).FirstOrDefault();
-
-
-        }
-
-        internal static List<TModelRepository> List(Expression<Func<TModelRepository, bool>> predicate = null, params Expression<Func<TModelRepository, object>>[] includeProperties)
-        {
-
-            if (predicate == null)
-            {
-                return (includeProperties.Aggregate
-             (dbConext.Set<TModelRepository>(), (current, includeProperty) => (DbSet<TModelRepository>)current.Include(includeProperty)).ToList());
-            }
-
-            return (includeProperties.Aggregate
-               (dbConext.Set<TModelRepository>().Where(predicate), (current, includeProperty) => current.Include(includeProperty)).ToList());
-        }
+       
         private static IDbContextTransaction _transaction;
 
 
 
-        public static void CreateDatabaseTransaction()
+        public  void CreateDatabaseTransaction()
         {
-            GetContextInstance();
+            dbConext = DbConext.GetContextInstance();
             _transaction = dbConext.Database.BeginTransaction();
         }
 
 
 
-        public static void Rollback()
+        public  void Rollback()
         {
             _transaction.Rollback();
         }
 
-        public static  void Dispose()
+        public   void Dispose()
         {
             _transaction.Dispose();
         }
 
-        public static void Commit()
+        public  void Commit()
         {
             _transaction.Commit();
+
         }
     }
 }

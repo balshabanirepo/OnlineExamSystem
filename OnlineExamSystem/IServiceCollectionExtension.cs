@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DataRepository
 {
-    public static class IServiceCollectionExtension
+    public static class ServiceCollectionExtension
     {
         public static IServiceCollection AddinterfacesonDataRepositoryDepends(this IServiceCollection services)
         {

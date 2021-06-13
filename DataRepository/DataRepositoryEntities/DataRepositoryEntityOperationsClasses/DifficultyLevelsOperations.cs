@@ -11,20 +11,21 @@ namespace DataRepository.DataRepositoryEntities.DataRepositoryEntityOperationsCl
 {
     public class DifficultyLevelsOperations : IDifficultyLevelsOperations, IModelMapper<DifficultyLevelsDataModel>
     {
-
-        //RepositoryGateWay<DifficultyLevels> DifficultyLevelsRepositoryGateWay = new RepositoryGateWay<DifficultyLevels>();
-        ContextGateway<DifficultyLevels> DifficultyLevelsRepositoryGateWay;
-        public DifficultyLevelsOperations()
+        IContextGateWay _contextGateWay;
+        public DifficultyLevelsOperations(IContextGateWay contextGateWay )
         {
-            ContextGateway<DifficultyLevels>.GetContextInstance();
+            _contextGateWay = contextGateWay;
         }
+        //RepositoryGateWay<DifficultyLevels> DifficultyLevelsRepositoryGateWay = new RepositoryGateWay<DifficultyLevels>();
+
+       
         public void Add(DifficultyLevelsDataModel difficultyLevels)
         {
             DifficultyLevels difficultyLevelsInstance = new DifficultyLevels();
             difficultyLevelsInstance.DifficultyLevelName = difficultyLevels.DifficultyLevelName;
             
 
-            ContextGateway<DifficultyLevels>.Add(difficultyLevelsInstance);
+            _contextGateWay.DifficultyLevels.Add(difficultyLevelsInstance);
 
 
         }
@@ -57,7 +58,7 @@ namespace DataRepository.DataRepositoryEntities.DataRepositoryEntityOperationsCl
             //List<DifficultyLevelsDataModel> listOfDifficultyLevels = DifficultyLevelsRepositoryGateWay.List().Select
             //     (s=>new DifficultyLevelsDataModel  { Id = s.Id, DifficultyLevelName = s.DifficultyLevelName }).ToList();
             // return listOfDifficultyLevels;
-            List<DifficultyLevelsDataModel> listOfDifficultyLevels = ContextGateway<DifficultyLevels>.List().Select
+            List<DifficultyLevelsDataModel> listOfDifficultyLevels =_contextGateWay.DifficultyLevels.List().Select
                  (s => new DifficultyLevelsDataModel { Id = s.Id, DifficultyLevelName = s.DifficultyLevelName }).ToList();
             return listOfDifficultyLevels;
            

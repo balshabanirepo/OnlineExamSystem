@@ -14,12 +14,14 @@ namespace ServicesClasseslibrary
 {
     public static  class ServiceCollectionExtension
     {
+       
         public static IServiceCollection AddServicesOnWhichServiceClassLibaryDepend(this IServiceCollection services)
         {
 
             services.AddScoped<IDifficultyLevelsOperations, DifficultyLevelsOperations>();
             services.AddScoped<IQuestionsOperations, QuestionsOperations>();
-         
+            services.AddinterfacesonDataRepositoryDepends();
+
             //services.AddScoped<ISystemSettingsModelMapper, SystemSettingsModelMapper>();
             //services.AddScoped<IRegistrarsModelMapper, RegistrarsModelMapper>();
             //services.AddScoped<IVaccinationTypesModelMapper, VaccinationTypesModelMapper>();

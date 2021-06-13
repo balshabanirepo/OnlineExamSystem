@@ -7,14 +7,25 @@ namespace DataRepository.GateWay
 {
     public class DbConext:DbContext
     {
-        
-       public DbConext()
+
+        private static DbConext dbConext;
+        public DbConext()
         {
-           
 
-           
 
-            
+
+
+
+        }
+
+
+        internal static DbConext GetContextInstance()
+        {
+            if (dbConext == null)
+            {
+                dbConext = new DbConext();
+            }
+            return dbConext;
         }
         protected  override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
