@@ -44,7 +44,7 @@ namespace ServicesClasseslibrary
 
         public List<ExamTypesDataModel> list()
         {
-            return null;
+            return _examTypesOperations.list();
         }
 
        
