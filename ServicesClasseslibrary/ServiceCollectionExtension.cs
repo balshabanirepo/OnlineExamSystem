@@ -19,7 +19,8 @@ namespace ServicesClasseslibrary
         {
 
             services.AddScoped<IDifficultyLevelsOperations, DifficultyLevelsOperations>();
-            services.AddScoped<IQuestionsOperations, QuestionsOperations>();
+            services.AddScoped<IQuestionsOperations, QuestionsOperations>();  
+            services.AddScoped<IExamTypesOperations, ExamTypesOperations>();
             services.AddinterfacesonDataRepositoryDepends();
 
             //services.AddScoped<ISystemSettingsModelMapper, SystemSettingsModelMapper>();

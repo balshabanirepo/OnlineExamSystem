@@ -1,4 +1,5 @@
 ﻿using DataModel;
+using DataRepository.DataRepositoryEntities.DataRepositoryOperationsInterface;
 using ServicesClasseslibrary.Interface;
 using System;
 using System.Collections.Generic;
@@ -8,60 +9,44 @@ namespace ServicesClasseslibrary
 {
     public class ExamTypesService : IExamTypesService
     {
-        void Add(ExamTypesDataModel examTypes)
+        private readonly IExamTypesOperations _examTypesOperations;
+
+        public ExamTypesService(IExamTypesOperations examTypesOperations)
         {
+            _examTypesOperations = examTypesOperations;
 
         }
-        void Edit(ExamTypesDataModel examTypes)
+       public void Add(ExamTypesDataModel examTypes)
         {
-
+            _examTypesOperations.Add(examTypes);
         }
-        
-      
-
-
-        void Delete(int id)
+        public void Edit(ExamTypesDataModel examTypes)
         {
+            _examTypesOperations.Edit(examTypes);
+        }
 
+
+
+
+        public void Delete(int id)
+        {
+            _examTypesOperations.Delete(id);
+        }
+
+
+
+
+
+        public ExamTypesDataModel GetById(int id)
+        {
+           return _examTypesOperations.GetById(id);
+        }
+
+        public List<ExamTypesDataModel> list()
+        {
+            return null;
         }
 
        
-
-
-
-        ExamTypesDataModel GetById(int id)
-        {
-            return null;
-        }
-
-        List<ExamTypesDataModel> list()
-        {
-            return null;
-        }
-
-        void IExamTypesService.Add(ExamTypesDataModel examTypes)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IExamTypesService.Edit(ExamTypesDataModel examTypes)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IExamTypesService.Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        ExamTypesDataModel IExamTypesService.GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<ExamTypesDataModel> IExamTypesService.list()
-        {
-            throw new NotImplementedException();
-        }
     } 
 }

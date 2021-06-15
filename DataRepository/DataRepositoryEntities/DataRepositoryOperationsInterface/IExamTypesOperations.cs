@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataRepository.DataRepositoryEntities.DataRepositoryOperationsInterface
 {
-    interface IExamTypesOperations
+  public  interface IExamTypesOperations
     {
         void Add(ExamTypesDataModel examTypes);
         void Edit(ExamTypesDataModel examTypes);

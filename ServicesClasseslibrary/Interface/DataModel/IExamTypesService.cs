@@ -8,15 +8,15 @@ namespace ServicesClasseslibrary
    public interface IExamTypesService 
     {
         void Add(ExamTypesDataModel examTypes);
-        void Edit(ExamTypesDataModel examTypes);
+         void Edit(ExamTypesDataModel examTypes);
 
 
 
-        void Delete(int id);
+         void Delete(int id);
 
 
-        ExamTypesDataModel GetById(int id);
+         ExamTypesDataModel GetById(int id);
 
-        List<ExamTypesDataModel> list();
+         List<ExamTypesDataModel> list();
     }
 }

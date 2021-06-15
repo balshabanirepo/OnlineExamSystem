@@ -14,6 +14,8 @@ namespace DataRepository.GateWay
 
         public RepositoryGateWay<DifficultyLevels> DifficultyLevels { get; set; }
 
+        public RepositoryGateWay<ExamTypes> ExamTypes { get; set; }
+
 
         public void CreateDatabaseTransaction();
 
@@ -25,3 +27,4 @@ namespace DataRepository.GateWay
         public void Commit();
     }
 }
+ 

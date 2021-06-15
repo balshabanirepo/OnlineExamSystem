@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataRepository.DataRepositoryEntities
 {
-   public class ExamTypes
+   public class ExamTypes:IRepository
     {
         public int Id { get; set; }
         public String ExamTypeName { get; set; }

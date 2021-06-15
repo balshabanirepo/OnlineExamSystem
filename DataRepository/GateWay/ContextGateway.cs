@@ -18,6 +18,8 @@ namespace DataRepository.GateWay
         public  RepositoryGateWay<QuestionAnswers> QuestionAnswers { get; set; }
 
         public RepositoryGateWay<DifficultyLevels> DifficultyLevels { get; set; }
+
+        public RepositoryGateWay<ExamTypes> ExamTypes { get; set; }
         private static DbConext dbConext;
         public ContextGateway()
         {
@@ -25,6 +27,7 @@ namespace DataRepository.GateWay
             QuestionAnswers = new RepositoryGateWay<QuestionAnswers>();
             DifficultyLevels = new RepositoryGateWay<DifficultyLevels>();
             Questions = new RepositoryGateWay<Questions>();
+            ExamTypes = new RepositoryGateWay<ExamTypes>();
 
 
         }
