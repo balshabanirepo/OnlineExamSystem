@@ -27,6 +27,56 @@
                 <span asp-validation-for="NumberOfQuestions" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+
+                            </th>
+                            <th>
+
+                            </th>
+                            <th>
+                                difficulty level
+                            </th>
+                            <th>
+                                Is correct
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int counter = 0;
+                        }
+                        @foreach (var item in Model.examTypesDetails)
+                        {
+                           
+
+                        <tr>
+                            <td style="visibility:hidden">
+                                <input asp-for="@item.Id" type="hidden" name="examTypesDetails[@counter].Id" id="examTypesDetails[@counter].Id" />
+                            </td>
+                            <td style="visibility:hidden">
+                                <input asp-for="@item.DifficultyLevelId" name="examTypesDetails[@counter].DifficultyLevelId" id="examTypesDetails[@counter].DifficultyLevelId" type="hidden" />
+                            </td>
+                            <td>
+                                <label> @item.DifficultyLevelName"</label> 
+                            </td>
+                            <td>
+
+                                <input asp-for="@item.NumberOfQuestions" class="form-control" name="examTypesDetails[@counter].NumberOfQuestions" id="examTypesDetails[@counter].NumberOfQuestions" />
+                                @Html.ValidationMessageFor(x => Model.examTypesDetails[counter].NumberOfQuestions)
+                            </td>
+
+
+                        </tr>
+                            counter++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

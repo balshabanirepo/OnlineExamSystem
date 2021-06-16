@@ -29,8 +29,19 @@ namespace DataRepository.DataRepositoryEntities.DataRepositoryEntityOperationsCl
                 NumberOfQuestions = examTypesDataModel.NumberOfQuestions
 
             };
+            _contextGateWay.CreateDatabaseTransaction();
+
             _contextGateWay.ExamTypes.Add(examTypes);
-              
+            foreach (ExamTypesDetailsDataModel examTypesDetails in examTypesDataModel.examTypesDetails)
+
+                _contextGateWay.ExamTypesDetails.Add(
+                    new ExamTypesDetails
+                    {
+                        DifficultyLevelId = examTypesDetails.DifficultyLevelId,
+                        NumberOfQuestions = examTypesDetails.NumberOfQuestions,
+                        ExamTypeId = examTypes.Id
+                    });
+            _contextGateWay.Commit();
         }
 
         public void Delete(int id)

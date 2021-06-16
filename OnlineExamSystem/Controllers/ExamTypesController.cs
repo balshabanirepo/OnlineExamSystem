@@ -37,8 +37,20 @@ namespace OnlineExamSystem.Controllers
         // GET: ExamTypes/Create
         public IActionResult Create()
         {
-            ViewData["DifficultyLevelId"] = new SelectList(_difficultyLevelsService.list(), "Id", "DifficultyLevelName");
-            return View();
+            ExamTypesDataModel examType = new ExamTypesDataModel();
+            examType.examTypesDetails = new List<ExamTypesDetailsDataModel>();
+             ViewData["DifficultyLevelId"] = new SelectList(_difficultyLevelsService.list(), "Id", "DifficultyLevelName");
+            List<DifficultyLevelsDataModel> difficultyLevels= _difficultyLevelsService.list();
+            foreach( DifficultyLevelsDataModel difficultylevel in difficultyLevels)
+            {
+                examType.examTypesDetails.Add(new ExamTypesDetailsDataModel
+                {
+                    DifficultyLevelId = difficultylevel.Id,
+                    DifficultyLevelName= difficultylevel.DifficultyLevelName,
+                    NumberOfQuestions = 0
+                });
+            }
+            return View(examType);
         }
 
         // POST: ExamTypes/Create
@@ -48,6 +60,11 @@ namespace OnlineExamSystem.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(ExamTypesDataModel examTypesDataModel)
         {
+            if(examTypesDataModel.NumberOfQuestions!=examTypesDataModel.examTypesDetails.Sum(s=>s.NumberOfQuestions))
+            {
+                ModelState.AddModelError("", "NumberOfQuestions per difficulty level must match number of questions for the exam");
+
+            }
             if (ModelState.IsValid)
             {
                 _examTypesService.Add(examTypesDataModel);

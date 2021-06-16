@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataRepository.DataRepositoryEntities
 {
-    public class ExamTypesDetails
+    public class ExamTypesDetails:IRepository
     {
         public int Id { get; set; }
         [ForeignKey("DifficultyLevel")]

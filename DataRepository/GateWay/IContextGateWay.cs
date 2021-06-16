@@ -16,6 +16,8 @@ namespace DataRepository.GateWay
 
         public RepositoryGateWay<ExamTypes> ExamTypes { get; set; }
 
+        public RepositoryGateWay<ExamTypesDetails> ExamTypesDetails { get; set; }
+
 
         public void CreateDatabaseTransaction();
 
