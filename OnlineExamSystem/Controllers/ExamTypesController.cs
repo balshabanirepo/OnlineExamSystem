@@ -62,7 +62,7 @@ namespace OnlineExamSystem.Controllers
         {
             if(examTypesDataModel.NumberOfQuestions!=examTypesDataModel.examTypesDetails.Sum(s=>s.NumberOfQuestions))
             {
-                ModelState.AddModelError("", "NumberOfQuestions per difficulty level must match number of questions for the exam");
+                ModelState.AddModelError("", "Total NumberOfQuestions per difficulty level must match number of questions for the exam");
 
             }
             if (ModelState.IsValid)

@@ -39,7 +39,11 @@ namespace DataRepository.DataRepositoryEntities.DataRepositoryEntityOperationsCl
 
         public void Edit(DifficultyLevelsDataModel difficultyLevels)
         {
-            
+            DifficultyLevels DifficultyLevel = new DifficultyLevels();
+            DifficultyLevels DifficultyLevelStoredInDb = _contextGateWay.DifficultyLevels.GetById(g => g.Id == difficultyLevels.Id);
+            DifficultyLevel.Id = difficultyLevels.Id;
+            DifficultyLevel.DifficultyLevelName = difficultyLevels.DifficultyLevelName;
+            _contextGateWay.DifficultyLevels.Edit(DifficultyLevelStoredInDb, DifficultyLevel);
         }
 
         public DifficultyLevelsDataModel GetById(int id)

@@ -20,6 +20,12 @@ namespace DataRepository.DataRepositoryEntities
         public virtual DifficultyLevels DifficultyLevel { get; set; }
 
 
+        [ForeignKey("Subject")]
+        public int? SubjectId { get; set; }
+
+        public virtual Subject Subject { get; set; }
+
+
         public virtual ICollection<ExamQuestions> ExamQuestions { get; set; }
 
     }

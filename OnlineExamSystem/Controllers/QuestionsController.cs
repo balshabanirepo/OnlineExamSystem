@@ -17,11 +17,13 @@ namespace OnlineExamSystem.Controllers
     {
         private readonly IQuestionsService _questionsService;
         private readonly IDifficultyLevelsService _difficultyLevelsService;
+        private readonly ISubjectsService _SubjectService;
 
-        public QuestionsController(IQuestionsService questionsService, IDifficultyLevelsService difficultyLevelsService)
+        public QuestionsController(IQuestionsService questionsService, IDifficultyLevelsService difficultyLevelsService, ISubjectsService subjectsService)
         {
             _questionsService = questionsService;
             _difficultyLevelsService = difficultyLevelsService;
+            _SubjectService = subjectsService;
         }
 
         // GET: Questions
@@ -37,12 +39,13 @@ namespace OnlineExamSystem.Controllers
         // GET: Questions/Create
         public IActionResult Create()
         {
-            var x = new List<QuestionAnswersDataModel>(5) {
+            var QuestionAnswers = new List<QuestionAnswersDataModel>(5) {
             new QuestionAnswersDataModel{IsCorrext=true },new QuestionAnswersDataModel(),new QuestionAnswersDataModel(),new QuestionAnswersDataModel(),new QuestionAnswersDataModel(), };
 
             ViewData["DifficultyLevelId"] = new SelectList(_difficultyLevelsService.list(), "Id", "DifficultyLevelName");
-            
-            return View(new QuestionsDataModel { QuestionAnswersDataModel=x });
+            ViewData["SubjectId"] = new SelectList(_SubjectService.list(), "Id", "SubjectName");
+
+            return View(new QuestionsDataModel { QuestionAnswersDataModel= QuestionAnswers });
         }
 
         // POST: Questions/Create

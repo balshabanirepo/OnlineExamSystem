@@ -8,7 +8,8 @@ using DataRepository;
 using DataRepository.GateWay;
 using DataRepository.DataRepositoryEntities.DataRepositoryOperationsInterface;
 using DataRepository.DataRepositoryEntities.DataRepositoryEntityOperationsClasses;
-
+using ServicesClasseslibrary.Interface;
+using ServicesClasseslibrary.Implmentation.DataModel;
 
 namespace ServicesClasseslibrary
 {
@@ -21,6 +22,7 @@ namespace ServicesClasseslibrary
             services.AddScoped<IDifficultyLevelsOperations, DifficultyLevelsOperations>();
             services.AddScoped<IQuestionsOperations, QuestionsOperations>();  
             services.AddScoped<IExamTypesOperations, ExamTypesOperations>();
+            services.AddScoped<ISubjectsOperation, SubjectsOperations>();
             services.AddinterfacesonDataRepositoryDepends();
 
             //services.AddScoped<ISystemSettingsModelMapper, SystemSettingsModelMapper>();

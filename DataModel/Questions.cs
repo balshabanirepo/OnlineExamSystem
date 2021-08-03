@@ -13,6 +13,8 @@ namespace DataModel
 
         public int DifficultyLevelId { get; set; }
 
+        public int SubjectId { get; set; }
+
 
         public List<QuestionAnswersDataModel> QuestionAnswersDataModel { get; set; }
 }

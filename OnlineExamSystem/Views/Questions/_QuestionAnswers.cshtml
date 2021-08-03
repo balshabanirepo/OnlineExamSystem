@@ -1,7 +1,8 @@
-﻿@model IEnumerable<DataModel.QuestionAnswersDataModel>
+﻿@model List<DataModel.QuestionAnswersDataModel>
 
 @{
     ViewData["Title"] = "_QuestionAnswers";
+    string hdnIsCorrectName;
 }
 
 <h1>_uestion Answers</h1>
@@ -11,38 +12,69 @@
     <thead>
         <tr>
             <th>
-              
+
             </th>
             <th>
-               
+
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AnswerText)
+                AnswerText
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsCorrext)
+                IsCorrect
             </th>
-            <th></th>
+
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td style="visibility:hidden">
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td style="visibility:hidden">
-                @Html.DisplayFor(modelItem => item.QuestionId)
-            </td>
-            <td>
-                @Html.TextBoxFor(modelItem => item.AnswerText)
-                @Html.ValidationMessageFor(modelItem => item.AnswerText)
-            </td>
-            <td>
-                @Html.RadioButton("IsCorrext", item.IsCorrext, new { name = "rbCorectAnswer" })
-            </td>
+        @{
+            int i = 0;
+        }
+        @for (i = 0; i < Model.Count(); i++)
+        {
+            <tr>
+                <td style="visibility:hidden">
+                    <input type="hidden" asp-for="@Model[i].Id" name="QuestionAnswersDataModel[@i].Id" />
+                    <!--The keypoint of the answer QuestionAnswersDataModel:same name of ienumerable property in first class (i.e questionsDataModel)-->
+                </td>
+                <td style="visibility:hidden">
+                    <input type="hidden" asp-for="@Model[i].QuestionId" name="QuestionAnswersDataModel[@i].QuestionId" />
+                </td>
 
-        </tr>
-}
+                <td>
+                    @*@Html.TextBoxFor(modelItem => item.AnswerText)*@
+                    <input type="text" asp-for="@Model[i].AnswerText" name="QuestionAnswersDataModel[@i].AnswerText" />
+                    @Html.ValidationMessageFor(modelItem => Model[i].AnswerText)
+                </td>
+                <td>
+                    @Html.RadioButton("IsCorrext", null, Model[i].IsCorrext, new
+                    {
+                        id = @i
+                    })
+
+                    @{
+                        hdnIsCorrectName = "hdnIsCorrect" + i.ToString();
+
+
+                    }
+
+
+                    <input name=@hdnIsCorrectName type="text" id=@hdnIsCorrectName value="False" />
+                </td>
+
+            </tr>
+
+
+
+
+        }
     </tbody>
 </table>
+@section Scripts 
+{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+}
+
+

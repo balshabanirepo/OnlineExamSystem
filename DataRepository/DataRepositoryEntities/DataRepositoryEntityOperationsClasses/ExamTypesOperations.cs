@@ -56,7 +56,9 @@ namespace DataRepository.DataRepositoryEntities.DataRepositoryEntityOperationsCl
 
         public ExamTypesDataModel GetById(int id)
         {
-            throw new NotImplementedException();
+            ExamTypes examTypes= _contextGateWay.ExamTypes.GetById(gb=>gb.Id==id);
+            ExamTypesDataModel examTypesDataModel = this.Map(examTypes);
+            return examTypesDataModel;
         }
 
         public List<ExamTypesDataModel> list()
@@ -75,10 +77,20 @@ namespace DataRepository.DataRepositoryEntities.DataRepositoryEntityOperationsCl
             ExamTypes examTypes = (ExamTypes)repository;
             return new ExamTypesDataModel
             {
-                Id= examTypes.Id,
-                ExamTypeName=examTypes.ExamTypeName,
-                DifficultyLevelId=examTypes.DifficultyLevelId,
-                NumberOfQuestions=examTypes.NumberOfQuestions
+                Id = examTypes.Id,
+                ExamTypeName = examTypes.ExamTypeName,
+                DifficultyLevelId = examTypes.DifficultyLevelId,
+                NumberOfQuestions = examTypes.NumberOfQuestions,
+                examTypesDetails = (from etd in
+                                   _contextGateWay.ExamTypesDetails.List(w => w.ExamTypeId == examTypes.Id, Exx => Exx.DifficultyLevel).ToList()
+                                    select new ExamTypesDetailsDataModel
+                                    {
+                                        Id = etd.Id,
+                                        DifficultyLevelId = etd.DifficultyLevelId,
+                                        DifficultyLevelName = etd.DifficultyLevel.DifficultyLevelName,
+                                        NumberOfQuestions = etd.NumberOfQuestions
+                                    }).ToList()
+
 
             };
         }

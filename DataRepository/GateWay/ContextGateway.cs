@@ -22,6 +22,7 @@ namespace DataRepository.GateWay
         public RepositoryGateWay<ExamTypesDetails> ExamTypesDetails { get; set; }
 
         public RepositoryGateWay<ExamTypes> ExamTypes { get; set; }
+        public RepositoryGateWay<Subject> Subjects { get; set; }
         private static DbConext dbConext;
         public ContextGateway()
         {
@@ -31,6 +32,7 @@ namespace DataRepository.GateWay
             Questions = new RepositoryGateWay<Questions>();
             ExamTypes = new RepositoryGateWay<ExamTypes>();
             ExamTypesDetails = new RepositoryGateWay<ExamTypesDetails>();
+            Subjects = new RepositoryGateWay<Subject>();
 
 
         }

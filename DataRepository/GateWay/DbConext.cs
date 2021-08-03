@@ -62,6 +62,8 @@ namespace DataRepository.GateWay
 
         public DbSet<DifficultyLevels> DifficultyLevels { get; set; }
 
+        public DbSet<Subject> Subjects { get; set; }
+
 
     }
 }
