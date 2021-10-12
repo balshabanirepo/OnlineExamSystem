@@ -57,9 +57,15 @@
 
 
                     }
+                    @if (Model[i].IsCorrext)
+                    {
 
-
-                    <input name=@hdnIsCorrectName type="text" id=@hdnIsCorrectName value="False" />
+                        <input name=@hdnIsCorrectName type="text" id=@hdnIsCorrectName value="True" />
+                    }
+                    else
+                    {
+                        <input name=@hdnIsCorrectName type="text" id=@hdnIsCorrectName value="False" />
+                    }
                 </td>
 
             </tr>
@@ -72,7 +78,7 @@
 </table>
 @section Scripts 
 {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+   <script src="Questions.js"></script>
 
 
 }

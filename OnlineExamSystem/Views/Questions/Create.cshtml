@@ -9,7 +9,7 @@
 <h4>Questions</h4>
 <hr />
 <div class="container">
-    <form asp-action="Create">
+    <form asp-action="Create" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-4">
 
@@ -30,6 +30,9 @@
                 </div>
             </div>
         </div>
+        @{
+            var list = new List<DataModel.QuestionAnswersDataModel> { new DataModel.QuestionAnswersDataModel() };
+        }
         @Html.Partial("_QuestionAnswers", Model.QuestionAnswersDataModel)
         <div class="form-group">
             <input type="submit" value="Create Question" />
@@ -41,18 +44,7 @@
     </div>
 </div>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-<script>
-    $(document).ready(function () {
-        
-        $("input[name='IsCorrext']").each(function (item, index) {
-          
-            $(index).change(function () {
-                alert($(index).prop('checked') )
-                $("#hdnIsCorrect" + $(index).attr("id")).val($(index).prop('checked') ? "True" : "False")
-            })
-        })
-    })
-</script>
+   @Html.Partial("QuestionsScript")
+
 }
 

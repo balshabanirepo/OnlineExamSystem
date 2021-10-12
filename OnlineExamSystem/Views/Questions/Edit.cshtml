@@ -27,7 +27,9 @@
         </div>
     </div>
     @Html.Partial("_QuestionAnswers", Model.QuestionAnswersDataModel)
-
+    <div class="form-group">
+        <input type="submit" value="Edit Question" />
+    </div>
 </form>
 
 
@@ -36,5 +38,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+  @Html.Partial("QuestionsScript")
 }

@@ -16,6 +16,6 @@ namespace DataModel
         public int SubjectId { get; set; }
 
 
-        public List<QuestionAnswersDataModel> QuestionAnswersDataModel { get; set; }
+        public IEnumerable<QuestionAnswersDataModel> QuestionAnswersDataModel { get; set; }
 }
 }

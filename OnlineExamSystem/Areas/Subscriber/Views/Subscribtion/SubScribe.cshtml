@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Subscribe";
+}
+
+    <div class="row">
+        <div class="col-lg-3">
+            <input type="text" asp-for="FirstName" id="FirstName_Add" class="form-control inputData" placeholder="الاسم الأول">
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="col-lg-3">
+            <input type="text" asp-for="SecondName" id="SecondName_Add" class="form-control inputData" placeholder="إسم الأب">
+            <span asp-validation-for="SecondName" class="text-danger"></span>
+        </div>
+        <div class="col-lg-3">
+            <input type="text" asp-for="ThirdName" id="thirdName_Add" class="form-control inputData" placeholder="إسم الجد">
+            <span asp-validation-for="ThirdName" class="text-danger"></span>
+        </div>
+        <div class="col-lg-3">
+            <input type="text" asp-for="FamilyName" id="FamilyName_Add" class="form-control inputData" placeholder="إسم العائلة">
+            <span asp-validation-for="FamilyName" class="text-danger"></span>
+        </div>
+    </div>
+

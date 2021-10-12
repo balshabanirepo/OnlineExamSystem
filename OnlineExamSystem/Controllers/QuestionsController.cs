@@ -53,11 +53,11 @@ namespace OnlineExamSystem.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(QuestionsDataModel questions)
+        public IActionResult Create(QuestionsDataModel questions,List<QuestionAnswersDataModel> dest)
         {
             for (int i=0;i< questions.QuestionAnswersDataModel.Count();i++)
             {
-                questions.QuestionAnswersDataModel[i].IsCorrext = Request.Form["hdnIsCorrect" + i.ToString()][0] == "True";
+                questions.QuestionAnswersDataModel.ElementAt(i).IsCorrext = Request.Form["hdnIsCorrect" + i.ToString()][0] == "True";
             }
                 
                 
@@ -102,7 +102,7 @@ namespace OnlineExamSystem.Controllers
             //}
             for (int i = 0; i < questions.QuestionAnswersDataModel.Count(); i++)
             {
-                questions.QuestionAnswersDataModel[i].IsCorrext = Request.Form["hdnIsCorrect" + i.ToString()][0] == "True";
+                questions.QuestionAnswersDataModel.ElementAt(i).IsCorrext = Request.Form["hdnIsCorrect" + i.ToString()][0] == "True";
             }
             if (ModelState.IsValid)
             {
