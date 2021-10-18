@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +29,8 @@ namespace OnlineExamSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+           
             services.AddControllersWithViews();
             services.AddScoped<IDifficultyLevelsService, DifficultyLevelsService>();
             services.AddScoped<IExamOprationsService, ExamOprationsService>();
@@ -35,6 +40,14 @@ namespace OnlineExamSystem
             services.AddScoped<IQuestionAnswersService, QuestionAnswersService>();
             services.AddScoped<IQuestionsService, QuestionsService>();
             services.AddScoped<ISubjectsService, SubjectService>();
+            services.AddHttpContextAccessor();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Login/Login";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                options.SlidingExpiration = true;
+            });
             services.AddServicesOnWhichServiceClassLibaryDepend();
         }
 
@@ -53,10 +66,12 @@ namespace OnlineExamSystem
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            
+            
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

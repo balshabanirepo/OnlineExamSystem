@@ -1,11 +1,13 @@
 ﻿using DataRepository.DataRepositoryEntities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
 namespace DataRepository.GateWay
 {
-    public class DbConext:DbContext
+    public class DbConext: IdentityDbContext<IdentityUser>
     {
 
         private static DbConext dbConext;
@@ -17,9 +19,13 @@ namespace DataRepository.GateWay
 
 
         }
+        public DbConext(DbContextOptions<DbConext> options)
+            : base(options)
+        {
 
+        }
 
-        internal static DbConext GetContextInstance()
+    internal static DbConext GetContextInstance()
         {
             if (dbConext == null)
             {
@@ -41,7 +47,7 @@ namespace DataRepository.GateWay
         protected override void OnModelCreating(ModelBuilder modelBuilder)
 
         {
-
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<QuestionAnswers>().HasKey(o => o.Id);
             modelBuilder.Entity<ExamTypesDetails>().HasKey(o => o.Id);
             modelBuilder.Entity<ExamTypes>().HasKey(o => o.Id);

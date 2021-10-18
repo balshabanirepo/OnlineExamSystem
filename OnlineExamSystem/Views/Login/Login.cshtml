@@ -1,0 +1,49 @@
+﻿@model DataModel.LoginDataModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="page-container">
+    <div class="page-content">
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="text-center">
+                    <img class="mb-20" style="height:60px !important" src="@Url.Content("~/Assets/images/logo/login_logo.png")" />
+                </div>
+                <div class="panel panel-body login-form">
+                   
+                    @using (Html.BeginForm("LoginProcess", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post,true, new { role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.Email) })
+                            <div class="form-control-feedback">
+                                <i class="icon-user text-muted"></i>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group has-feedback has-feedback-left">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.Password) })
+                            <div class="form-control-feedback">
+                                <i class="icon-lock2 text-muted"></i>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">Login <i class="icon-circle-right2 position-right"></i></button>
+                        </div>
+                    }
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
