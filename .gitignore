@@ -338,3 +338,7 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/OnlineExamSystem/Heplers
+/OnlineExamSystem/Class.cs
+/DataRepository/DataRepositoryEntities/Attachments.cs
+/DataRepository/DataRepositoryEntities/AttachmentData.cs

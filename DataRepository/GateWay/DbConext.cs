@@ -1,5 +1,5 @@
 ﻿using DataRepository.DataRepositoryEntities;
-using Microsoft.AspNetCore.Identity;
+
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataRepository.GateWay
 {
-    public class DbConext: IdentityDbContext<IdentityUser>
+    public class DbConext: IdentityDbContext<ApplicationUser>
     {
 
         private static DbConext dbConext;

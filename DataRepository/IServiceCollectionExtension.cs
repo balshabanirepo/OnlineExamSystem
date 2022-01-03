@@ -1,4 +1,5 @@
-﻿using DataRepository.GateWay;
+﻿using DataRepository.DataRepositoryEntities;
+using DataRepository.GateWay;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,7 +26,7 @@ namespace DataRepository
             }
             );
             services.AddSingleton<IContextGateWay, ContextGateway>();
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<DbConext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<DbConext>();
 
             return services;
         }
