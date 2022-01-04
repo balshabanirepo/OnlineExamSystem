@@ -96,20 +96,24 @@ namespace OnlineExamSystem.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(ExamTypesDataModel examTypes)
+        public IActionResult Edit(ExamTypesDataModel examTypesDataModel)
         {
-           
 
+            if (examTypesDataModel.NumberOfQuestions != examTypesDataModel.examTypesDetails.Sum(s => s.NumberOfQuestions))
+            {
+                ModelState.AddModelError("", "Total NumberOfQuestions per difficulty level must match number of questions for the exam");
+
+            }
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _examTypesService.Edit(examTypes);
+                    _examTypesService.Edit(examTypesDataModel);
                    
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ExamTypesExists(examTypes.Id))
+                    if (!ExamTypesExists(examTypesDataModel.Id))
                     {
                         return NotFound();
                     }
@@ -121,7 +125,7 @@ namespace OnlineExamSystem.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DifficultyLevelId"] = new SelectList(_difficultyLevelsService.list(), "Id", "DifficultyLevelName");
-            return View(examTypes);
+            return View(examTypesDataModel);
         }
 
         // GET: ExamTypes/Delete/5

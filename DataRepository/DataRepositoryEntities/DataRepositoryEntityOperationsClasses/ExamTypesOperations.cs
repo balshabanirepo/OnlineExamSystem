@@ -49,9 +49,34 @@ namespace DataRepository.DataRepositoryEntities.DataRepositoryEntityOperationsCl
             throw new NotImplementedException();
         }
 
-        public void Edit(ExamTypesDataModel examTypes)
+        public void Edit(ExamTypesDataModel examTypesDataModel)
         {
-            throw new NotImplementedException();
+           
+            _contextGateWay.ExamTypes.GetById(g=>g.Id==examTypesDataModel.Id);
+
+            _contextGateWay.CreateDatabaseTransaction();
+
+
+
+            foreach (ExamTypesDetailsDataModel examTypesDetails in examTypesDataModel.examTypesDetails)
+            {
+               
+                ExamTypesDetails typesDetails = _contextGateWay.ExamTypesDetails.GetById(g => g.Id == examTypesDetails.Id);
+                _contextGateWay.ExamTypesDetails.Delete(typesDetails);
+                _contextGateWay.ExamTypesDetails.Add(
+                    new ExamTypesDetails
+                    {
+                        DifficultyLevelId = examTypesDetails.DifficultyLevelId,
+                        NumberOfQuestions = examTypesDetails.NumberOfQuestions,
+                        ExamTypeId = examTypesDataModel.Id
+                    });
+
+
+
+            }
+          
+
+            _contextGateWay.Commit();
         }
 
         public ExamTypesDataModel GetById(int id)
