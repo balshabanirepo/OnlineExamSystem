@@ -687,13 +687,14 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROC [dbo].[CreateExam] 
+create PROC [dbo].[CreateExam] 
 	  @ExamTypesId INT = NULL
-	,@DifficultyLevelId INT = NULL
-	,@NumberOfQuestions INT = NULL
+	
+	
 	,@SubjectId INT = NULL
 AS
 DECLARE @ExamId INT
+declare @NumberOfQuestions INT = 0,@DifficultyLevelId INT = 0
 DECLARE @table TABLE ([QuestionId] INT)
 
 DECLARE xcursor CURSOR
@@ -711,13 +712,14 @@ INTO @DifficultyLevelId
 
 WHILE @@FETCH_STATUS = 0
 BEGIN
+	
 	PRINT @DifficultyLevelId
 
 	INSERT INTO @table
 	SELECT [dbo].[Questions].Id
 	FROM Questions
 	WHERE SubjectId = @SubjectId
-		AND DifficultyLevelId = @DifficultyLevelId
+		AND DifficultyLevelId = @DifficultyLevelId and @NumberOfQuestions>0
 
 	FETCH xcursor
 	INTO @DifficultyLevelId
@@ -748,7 +750,7 @@ INSERT INTO [dbo].[ExamQuestions] (
 SELECT @ExamId
 	,questionID
 FROM @table
-
+se
 SELECT QuestionAnswers.AnswerText
 	,Questions.QuestionText
 	,DifficultyLevels.DifficultyLevelName
