@@ -700,6 +700,19 @@ DECLARE @table TABLE ([QuestionId] INT)
 
 DECLARE xcursor CURSOR LOCAL STATIC 
 FOR
+PROC [dbo].[CreateExam] 
+	  @ExamTypesId INT = NULL
+	
+	
+	,@SubjectId INT = NULL
+AS
+DECLARE @ExamId INT
+declare @NumberOfQuestions INT = 0,@DifficultyLevelId INT = 0
+DECLARE @table TABLE ([QuestionId] INT)
+
+
+DECLARE xcursor CURSOR LOCAL STATIC 
+FOR
 SELECT [DifficultyLevelId]
 	,[NumberOfQuestions]
 FROM [dbo].[ExamTypesDetails]
@@ -752,7 +765,7 @@ INSERT INTO [dbo].[ExamQuestions] (
 SELECT @ExamId
 	,questionID
 FROM @table
-se
+
 SELECT QuestionAnswers.AnswerText
 	,Questions.QuestionText
 	,DifficultyLevels.DifficultyLevelName
