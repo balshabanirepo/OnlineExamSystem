@@ -11,7 +11,7 @@ namespace OnlineExamSystem.Controllers
 {
     public class SubjectsController : Controller
     {
-      
+
         private readonly ISubjectsService _SubjectsService;
 
         public SubjectsController(ISubjectsService SubjectsService)
@@ -114,16 +114,11 @@ namespace OnlineExamSystem.Controllers
                 return NotFound();
             }
 
-            return View(Subjects);
-        }
-
-        // POST: Subjects/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
             _SubjectsService.Delete((int)id);
             return RedirectToAction(nameof(Index));
         }
+
+        // POST: Subjects/Delete/5
+
     }
-    }
+}

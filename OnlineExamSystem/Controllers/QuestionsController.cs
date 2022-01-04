@@ -142,19 +142,13 @@ namespace OnlineExamSystem.Controllers
                 return NotFound();
             }
 
-            return View(questions);
-        }
-
-        // POST: Questions/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            var questions = _questionsService.GetById(id);
-            _questionsService.Delete(id);
-
+            
+            _questionsService.Delete(id.Value);
             return RedirectToAction(nameof(Index));
+
+
         }
+      
 
         
     }

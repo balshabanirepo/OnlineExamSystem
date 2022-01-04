@@ -118,17 +118,12 @@ namespace OnlineExamSystem.Controllers
                 return NotFound();
             }
 
-            return View(difficultyLevels);
-        }
-
-        // POST: DifficultyLevels/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
             _difficultyLevelsService.Delete((int)id);
             return RedirectToAction(nameof(Index));
         }
+
+        // POST: DifficultyLevels/Delete/5
+      
 
        
     }

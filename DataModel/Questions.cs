@@ -10,10 +10,10 @@ namespace DataModel
         public int Id { get; set; }
         [Required]
         public String QuestionText{ get; set; }
+        [Required]
+        public int? DifficultyLevelId { get; set; }
 
-        public int DifficultyLevelId { get; set; }
-
-        public int SubjectId { get; set; }
+        public int? SubjectId { get; set; }
 
 
         public IEnumerable<QuestionAnswersDataModel> QuestionAnswersDataModel { get; set; }

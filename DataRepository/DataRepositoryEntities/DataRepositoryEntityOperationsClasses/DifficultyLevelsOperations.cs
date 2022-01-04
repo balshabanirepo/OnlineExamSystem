@@ -32,9 +32,9 @@ namespace DataRepository.DataRepositoryEntities.DataRepositoryEntityOperationsCl
 
         public void Delete(int id)
         {
-            //DifficultyLevels difficultyLevelsInstance = new DifficultyLevels();
-            //difficultyLevelsInstance = DifficultyLevelsRepositoryGateWay.GetById(g => g.Id == id);
-            //DifficultyLevelsRepositoryGateWay.Delete(difficultyLevelsInstance);
+            DifficultyLevels difficultyLevelsInstance = new DifficultyLevels();
+            difficultyLevelsInstance = _contextGateWay.DifficultyLevels.GetById(g => g.Id == id);
+            _contextGateWay.DifficultyLevels.Delete(difficultyLevelsInstance);
         }
 
         public void Edit(DifficultyLevelsDataModel difficultyLevels)
@@ -48,13 +48,11 @@ namespace DataRepository.DataRepositoryEntities.DataRepositoryEntityOperationsCl
 
         public DifficultyLevelsDataModel GetById(int id)
         {
-            //DifficultyLevels difficultyLevelsInstance = new DifficultyLevels();
-            //difficultyLevelsInstance = new DifficultyLevels();
-            //difficultyLevelsInstance = DifficultyLevelsRepositoryGateWay.GetById(g => g.Id == id);
-            //return (DifficultyLevelsDataModel) this.Map(difficultyLevelsInstance);
 
-            //return new DataModel.DifficultyLevelsDataModel { Id = difficultyLevelsInstance.Id, DifficultyLevelName = difficultyLevelsInstance.DifficultyLevelName };
-            return null;
+            DifficultyLevels difficultyLevelsInstance = new DifficultyLevels();
+            difficultyLevelsInstance = _contextGateWay.DifficultyLevels.GetById(g => g.Id == id);
+           
+            return (DifficultyLevelsDataModel)this.Map(difficultyLevelsInstance);
         }
 
         public List<DifficultyLevelsDataModel> list()
@@ -72,11 +70,11 @@ namespace DataRepository.DataRepositoryEntities.DataRepositoryEntityOperationsCl
 
         public DifficultyLevelsDataModel Map(IRepository RepoistoryObject)
         {
-            //DifficultyLevels difficultyLevelsInstance = (DifficultyLevels)RepoistoryObject;
+            DifficultyLevels difficultyLevelsInstance = (DifficultyLevels)RepoistoryObject;
 
-            //return new DataModel.DifficultyLevelsDataModel { Id = difficultyLevelsInstance.Id, DifficultyLevelName = difficultyLevelsInstance.DifficultyLevelName };
+            return new DataModel.DifficultyLevelsDataModel { Id = difficultyLevelsInstance.Id, DifficultyLevelName = difficultyLevelsInstance.DifficultyLevelName };
 
-            return null;
+           
         }
 
        

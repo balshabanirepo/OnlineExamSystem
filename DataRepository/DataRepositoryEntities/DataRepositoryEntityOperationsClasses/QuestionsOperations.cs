@@ -23,8 +23,8 @@ namespace DataRepository.DataRepositoryEntities.DataRepositoryEntityOperationsCl
             {
                 Id = questionsDataModel.Id,
                 QuestionText = questionsDataModel.QuestionText,
-                DifficultyLevelId = questionsDataModel.DifficultyLevelId,
-
+                DifficultyLevelId = questionsDataModel.DifficultyLevelId.Value,
+                SubjectId= questionsDataModel.SubjectId.Value
 
             };
 
@@ -50,7 +50,9 @@ namespace DataRepository.DataRepositoryEntities.DataRepositoryEntityOperationsCl
 
         public void Delete(int id)
         {
-           
+            var q = _contextGateWay.Questions.GetById(g => g.Id == id);
+            _contextGateWay.Questions.Delete(q);
+
         }
 
         public void Edit(QuestionsDataModel questionsDataModel)
@@ -64,7 +66,7 @@ namespace DataRepository.DataRepositoryEntities.DataRepositoryEntityOperationsCl
 
                 Id = questionsDataModel.Id,
                 QuestionText = questionsDataModel.QuestionText,
-                DifficultyLevelId=questionsDataModel.DifficultyLevelId
+                DifficultyLevelId=questionsDataModel.DifficultyLevelId.Value
             };
             questions2 = _contextGateWay.Questions.GetById(g => g.Id == questionsDataModel.Id);
 

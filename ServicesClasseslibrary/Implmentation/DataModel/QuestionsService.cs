@@ -23,7 +23,7 @@ namespace ServicesClasseslibrary
 
         public void Delete(int id)
         {
-           
+            _questionsOperations.Delete(id);
         }
 
         public void Edit(QuestionsDataModel questionAnswers)
